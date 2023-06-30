@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#5C92D1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score Keeping"
+        android:textSize="40dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/appSubTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917"></TextView>
+
+    <TextView
+        android:id="@+id/appSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="296dp"
+        android:fontFamily="sans-serif"
+        android:text="Please select a game that you are playing"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        app:columnCount="3"
+        app:rowCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appSubTitle">
+
+        <Button
+            android:id="@+id/game_badminton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_margin="2sp"
+            android:gravity="fill"
+            android:text="Badminton"
+            android:textAllCaps="true"
+            android:textColor="#135EB6"
+            android:textStyle="bold"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/game_cricket"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_margin="2sp"
+            android:gravity="fill"
+            android:text="Cricket"
+            android:textColor="#135EB6"
+            android:textStyle="bold"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            tools:ignore="DuplicateIds" />
+
+        <Button
+            android:id="@+id/game_football"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_margin="2sp"
+            android:gravity="fill"
+            android:text="Football"
+            android:textAllCaps="true"
+            android:textColor="#135EB6"
+            android:textStyle="bold"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+
+    </androidx.gridlayout.widget.GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
