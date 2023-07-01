@@ -14,7 +14,7 @@ import org.w3c.dom.Text
 import kotlin.math.log
 
 
-private enum class GAMESCROES(val gameName:String, val scoreRange:IntRange){
+enum class GAMESCORES(val gameName:String, val scoreRange:IntRange){
     CRICKET("Cricket", 0..300),
     FOOTBALL("Football", 0..9),
     BADMINTON("Badminton", 0..7)
@@ -33,9 +33,9 @@ class ActualScoring : AppCompatActivity() {
         addingPointsForTeams(sportsName, "B")
     }
 
-    private fun getSportsName():GAMESCROES {
+    private fun getSportsName():GAMESCORES {
         val importedValue = intent.getStringExtra("GAME_NAME").toString()
-        val sportsName: GAMESCROES = GAMESCROES.values().find { it.name == importedValue }?: GAMESCROES.BADMINTON
+        val sportsName: GAMESCORES = GAMESCORES.values().find { it.name == importedValue }?: GAMESCORES.BADMINTON
         var textViewName = findViewById<TextView>(R.id.nameOfTheGame).apply {
             text = sportsName.name
         }
@@ -43,10 +43,9 @@ class ActualScoring : AppCompatActivity() {
     }
 
 
-    private fun addingPointsForTeams(sportsName: GAMESCROES, teamName: String) {
+    private fun addingPointsForTeams(sportsName: GAMESCORES, teamName: String) {
         lateinit var btnTeamScore:FloatingActionButton
         lateinit var scoreBoard:TextView
-        var whosWinning = findViewById<TextView>(R.id.whosWinning)
         when(teamName) {
             "A" -> {
                 btnTeamScore  = findViewById<FloatingActionButton>(R.id.floatingButtonTeamA)
@@ -59,26 +58,51 @@ class ActualScoring : AppCompatActivity() {
         }
 
         var scoreValue = 0
-        whosWinning.text = "Let the game begin!"
         btnTeamScore.setOnClickListener {
             scoreValue++
             if (!sportsName.scoreRange.contains(scoreValue)) {
                 scoreValue = 0
             }
 
-            when (sportsName) {
-                GAMESCROES.BADMINTON -> {
-                    when (scoreValue) {
-                        0 -> whosWinning.text = "Love all Lets play!"
-                        6 -> scoreBoard.text = "Game point"
-                        else -> scoreBoard.text = scoreValue.toString()
-                    }
-                }
-                else -> {
-                    scoreBoard.text = scoreValue.toString()
-                }
-            }
+            scoreBoard.text = scoreValue.toString()
+            compareScores(sportsName, scoreValue)
         }
     }
 
+    fun compareScores(gameName: GAMESCORES, scoreValue: Int) {
+        var whosWinning = findViewById<TextView>(R.id.whosWinning)
+        var teamAScore = findViewById<TextView>(R.id.teamAScore)
+        var teamBScore = findViewById<TextView>(R.id.teamBScore)
+
+        Log.d("Score team A", teamAScore.text.toString())
+        Log.d("Score team B", teamBScore.text.toString())
+        Log.d("see the value", (teamAScore.text.toString().compareTo("0")).toString())
+
+            if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) < 0) {
+                whosWinning.text = "Team B seems to be winning"
+            } else if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) > 0) {
+                whosWinning.text = "Team A seems to be winning"
+            } else if((teamAScore.text.toString().compareTo("0") == 0) && (teamAScore.text.toString().compareTo("0") == 0) ) {
+                whosWinning.text = "Let's have another round then"
+            } else {
+                whosWinning.text = "Seems to be a draw"
+            }
+
+        when(gameName) {
+            GAMESCORES.BADMINTON -> {
+                if(teamAScore.text.toString().compareTo("7") == 0) {
+                    whosWinning.text = "Team A won!"
+                } else if(teamBScore.text.toString().compareTo("7") == 0) {
+                    whosWinning.text = "Team B won!"
+                }
+            }
+            GAMESCORES.CRICKET -> {
+
+            }
+            GAMESCORES.FOOTBALL -> {
+
+            }
+        }
+
+    }
 }
