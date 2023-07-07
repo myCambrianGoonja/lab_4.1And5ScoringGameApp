@@ -10,4 +10,5 @@
     <string name="team_b">Team B</string>
     <string name="lets_play">Lets Play</string>
     <string name="zero">0</string>
+    <string name="increament">Increasing the score by one</string>
 </resources>
