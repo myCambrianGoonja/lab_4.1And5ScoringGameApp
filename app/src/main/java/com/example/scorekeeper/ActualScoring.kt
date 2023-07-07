@@ -14,11 +14,12 @@ import org.w3c.dom.Text
 import kotlin.math.log
 
 
-enum class GAMESCORES(val gameName:String, val scoreRange:IntRange){
-    CRICKET("Cricket", 0..300),
-    FOOTBALL("Football", 0..9),
-    BADMINTON("Badminton", 0..7)
+enum class GAMESCORES(val gameName:String, val scoreRange:IntRange, countingType: String){
+    CRICKET("Cricket", 0..300, "ONLY_SIXES"),
+    FOOTBALL("Football", 0..9, "PENALTY_SHOTS"),
+    BADMINTON("Badminton", 0..15, "GAME_OF_SEVEN")
 }
+
 
 class ActualScoring : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +79,8 @@ class ActualScoring : AppCompatActivity() {
         Log.d("Score team B", teamBScore.text.toString())
         Log.d("see the value", (teamAScore.text.toString().compareTo("0")).toString())
 
+        val maximumScore = (gameName.scoreRange.count() - 1)
+
             if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) < 0) {
                 whosWinning.text = "Team B seems to be winning"
             } else if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) > 0) {
@@ -88,21 +91,6 @@ class ActualScoring : AppCompatActivity() {
                 whosWinning.text = "Seems to be a draw"
             }
 
-        when(gameName) {
-            GAMESCORES.BADMINTON -> {
-                if(teamAScore.text.toString().compareTo("7") == 0) {
-                    whosWinning.text = "Team A won!"
-                } else if(teamBScore.text.toString().compareTo("7") == 0) {
-                    whosWinning.text = "Team B won!"
-                }
-            }
-            GAMESCORES.CRICKET -> {
-
-            }
-            GAMESCORES.FOOTBALL -> {
-
-            }
-        }
 
     }
 }

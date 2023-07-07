@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="Select the type of counting"
+            android:text="Select the type of counting "
             tools:layout_editor_absoluteX="52dp"
             tools:layout_editor_absoluteY="75dp" />
 
