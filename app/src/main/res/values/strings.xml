@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ScoreKeeper</string>
+    <string name="score_keeping">Score Keeping</string>
+    <string name="game_select_text">Please select a game that you are playing</string>
+    <string name="cricket">Cricket</string>
+    <string name="badminton">Badminton</string>
+    <string name="football">Football</string>
+    <string name="type_of_counting_text">Select the type of counting</string>
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+    <string name="lets_play">Lets Play</string>
+    <string name="zero">0</string>
 </resources>

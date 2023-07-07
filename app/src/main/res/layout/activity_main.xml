@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#5C92D1"
+    android:background="@color/danube"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -11,14 +11,13 @@
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score Keeping"
+        android:text="@string/score_keeping"
         android:textSize="40dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/appSubTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917"></TextView>
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/appSubTitle"
@@ -26,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="296dp"
         android:fontFamily="sans-serif"
-        android:text="Please select a game that you are playing"
+        android:text="@string/game_select_text"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,9 +53,9 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_margin="2sp"
             android:gravity="fill"
-            android:text="Badminton"
+            android:text="@string/badminton"
             android:textAllCaps="true"
-            android:textColor="#135EB6"
+            android:textColor="@color/denim"
             android:textStyle="bold"
             app:layout_columnWeight="1"
             app:layout_row="0" />
@@ -66,21 +65,20 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_margin="2sp"
             android:gravity="fill"
-            android:text="Cricket"
-            android:textColor="#135EB6"
+            android:text="@string/cricket"
+            android:textColor="@color/denim"
             android:textStyle="bold"
             app:layout_columnWeight="1"
-            app:layout_row="0"
-            tools:ignore="DuplicateIds" />
+            app:layout_row="0" />
 
         <Button
             android:id="@+id/game_football"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_margin="2sp"
             android:gravity="fill"
-            android:text="Football"
+            android:text="@string/football"
             android:textAllCaps="true"
-            android:textColor="#135EB6"
+            android:textColor="@color/denim"
             android:textStyle="bold"
             app:layout_columnWeight="1"
             app:layout_row="0" />

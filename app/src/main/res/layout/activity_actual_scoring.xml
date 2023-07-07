@@ -4,98 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/danube"
     tools:context=".ActualScoring">
 
     <TextView
         android:id="@+id/nameOfTheGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="206dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout2"
         android:layout_width="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="80dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="Select the type of counting "
+            android:text="@string/type_of_counting_text"
+            android:textColor="@color/shuttle_gray"
             tools:layout_editor_absoluteX="52dp"
             tools:layout_editor_absoluteY="75dp" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/continuousOrOneByOne"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/type_of_spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:allowUndo="true"
-            android:checkable="true"
-            android:text="continuous"
-            app:chipIconVisible="true"
-            tools:layout_editor_absoluteX="242dp"
-            tools:layout_editor_absoluteY="61dp" />
+            android:layout_marginLeft="20sp" />
 
     </androidx.gridlayout.widget.GridLayout>
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameOfTheGame"
-        app:layout_constraintVertical_bias="0.108"
-        app:columnCount="6"
         android:id="@+id/teamNames"
-        android:layout_marginHorizontal="60sp"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_width="325dp"
+        android:layout_height="43dp"
+        android:layout_marginHorizontal="40dp"
+        app:columnCount="6"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout2">
 
         <TextView
             android:id="@+id/teamA"
             android:gravity="fill"
             android:padding="10sp"
-            android:text="Team A"
+            android:text="@string/team_a"
+            android:textColor="@color/shuttle_gray"
+            android:textStyle="bold"
             app:layout_column="2" />
 
         <TextView
             android:id="@+id/teamB"
             android:gravity="fill"
             android:padding="10sp"
-            app:layout_column="5"
-            android:text="Team B" />
+            android:paddingRight="0sp"
+            android:text="@string/team_b"
+            android:textColor="@color/shuttle_gray"
+            android:textStyle="bold"
+            app:layout_column="5" />
     </androidx.gridlayout.widget.GridLayout>
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="0dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="45sp"
         app:columnCount="6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamNames"
-        app:layout_constraintVertical_bias="0.043"
-        app:rowCount="4">
+        app:rowCount="4"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="182dp"
+        tools:ignore="MissingConstraints">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingButtonTeamA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25sp"
+            android:layout_marginLeft="10dp"
             android:clickable="true"
             app:layout_column="2"
             app:layout_row="1"
-            android:contentDescription="Button for adding score of Team A"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -106,37 +105,42 @@
             android:clickable="true"
             app:layout_column="5"
             app:layout_row="1"
-            android:contentDescription="Button for adding score of Team B"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
         <TextView
             android:id="@+id/teamAScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="25dp"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
-            android:text="0"
+            android:text="@string/zero"
             android:textAlignment="center"
             app:layout_column="2"
-            app:layout_row="2" />
+            app:layout_row="2"
+            android:textStyle="bold"
+            android:textColor="@color/shuttle_gray"/>
 
         <TextView
             android:id="@+id/teamBScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
             android:layout_marginLeft="40dp"
-            android:text="0"
+            android:paddingHorizontal="10dp"
+            android:text="@string/zero"
             android:textAlignment="center"
             app:layout_column="5"
-            app:layout_row="2" />
+            app:layout_row="2"
+            android:textStyle="bold"
+            android:textColor="@color/shuttle_gray"/>
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
         android:id="@+id/whosWinning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lets Play"
+        android:text="@string/lets_play"
+        android:textColor="@color/shuttle_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
