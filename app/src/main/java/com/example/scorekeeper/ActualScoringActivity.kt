@@ -1,17 +1,12 @@
 package com.example.scorekeeper
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.webkit.ConsoleMessage
-import android.widget.Button
 import android.widget.TextView
-import androidx.core.util.rangeTo
-import com.google.android.material.chip.Chip
+import com.example.scorekeeper.databinding.ActivityActualScoringBinding
+import com.example.scorekeeper.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.w3c.dom.Text
-import kotlin.math.log
 
 
 enum class GAMESCORES(val gameName:String, val scoreRange:IntRange, countingType: String){
@@ -21,11 +16,16 @@ enum class GAMESCORES(val gameName:String, val scoreRange:IntRange, countingType
 }
 
 
-class ActualScoring : AppCompatActivity() {
+class ActualScoringActivity : AppCompatActivity() {
+    private lateinit var viewBinding : ActivityActualScoringBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_actual_scoring)
+        viewBinding = ActivityActualScoringBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
+
+         lateinit var viewBinding : ActivityMainBinding
 
         //Getting the name of the sports selected
         val sportsName = getSportsName()
@@ -35,7 +35,8 @@ class ActualScoring : AppCompatActivity() {
     }
 
     private fun getSportsName():GAMESCORES {
-        val importedValue = intent.getStringExtra("GAME_NAME").toString()
+        val importedValue = intent.getStringExtra("GAME_NAME")
+        Log.d("imported Value", importedValue.toString())
         val sportsName: GAMESCORES = GAMESCORES.values().find { it.name == importedValue }?: GAMESCORES.BADMINTON
         var textViewName = findViewById<TextView>(R.id.nameOfTheGame).apply {
             text = sportsName.name
@@ -49,12 +50,12 @@ class ActualScoring : AppCompatActivity() {
         lateinit var scoreBoard:TextView
         when(teamName) {
             "A" -> {
-                btnTeamScore  = findViewById<FloatingActionButton>(R.id.floatingButtonTeamA)
-                scoreBoard = findViewById<TextView>(R.id.teamAScore)
+                btnTeamScore  = viewBinding.floatingButtonTeamA
+                scoreBoard = viewBinding.teamAScore
             }
             "B" -> {
-                btnTeamScore  = findViewById<FloatingActionButton>(R.id.floatingButtonTeamB)
-                scoreBoard = findViewById<TextView>(R.id.teamBScore)
+                btnTeamScore  = viewBinding.floatingButtonTeamB
+                scoreBoard = viewBinding.teamBScore
             }
         }
 
@@ -71,13 +72,10 @@ class ActualScoring : AppCompatActivity() {
     }
 
     fun compareScores(gameName: GAMESCORES, scoreValue: Int) {
-        var whosWinning = findViewById<TextView>(R.id.whosWinning)
-        var teamAScore = findViewById<TextView>(R.id.teamAScore)
-        var teamBScore = findViewById<TextView>(R.id.teamBScore)
+        var whosWinning = viewBinding.whosWinning
+        var teamAScore = viewBinding.teamAScore
+        var teamBScore = viewBinding.teamAScore
 
-        Log.d("Score team A", teamAScore.text.toString())
-        Log.d("Score team B", teamBScore.text.toString())
-        Log.d("see the value", (teamAScore.text.toString().compareTo("0")).toString())
 
         val maximumScore = (gameName.scoreRange.count() - 1)
 
