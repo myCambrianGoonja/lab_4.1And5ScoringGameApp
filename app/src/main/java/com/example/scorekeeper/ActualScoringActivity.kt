@@ -2,13 +2,15 @@ package com.example.scorekeeper
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.scorekeeper.databinding.ActivityActualScoringBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-enum class GAMESCORES(val gameName: String, val scoreRange: IntRange, val countingType: Array<String>) {
+enum class GAMESCORES(val gameName: String, var scoreRange: IntRange, val countingType: Array<String>) {
     CRICKET("Cricket", 0..300, arrayOf("standard", "sixes", "fours")),
     FOOTBALL("Football", 0..9, arrayOf("standard", "penalty")),
     BADMINTON("Badminton", 0..15, arrayOf("standard", "seven_points"))
@@ -35,7 +37,30 @@ class ActualScoringActivity : AppCompatActivity() {
             sportsName.countingType
         )
         viewBinding.typeOfCounting.adapter = countingTypesAdapter
+
+        viewBinding.typeOfCounting.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCountingType = sportsName.countingType[position]
+                // Handle the selected counting type here
+                Log.d("Selected Counting Type", selectedCountingType)
+
+                when(selectedCountingType) {
+                    "penalty" -> {
+                        viewBinding.penaltyText.text = "Penalty"
+                        viewBinding.penaltyScoreA.text = "0"
+                        viewBinding.penaltyScoreB.text = "0"
+                    } "seven_points" -> {
+                        GAMESCORES.BADMINTON.scoreRange = 0..7
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
     }
+
 
     private fun getSportsName(): GAMESCORES {
         val importedValue = intent.getStringExtra("GAME_NAME")
@@ -46,6 +71,7 @@ class ActualScoringActivity : AppCompatActivity() {
     }
 
     private fun addingPointsForTeams(sportsName: GAMESCORES, teamName: String) {
+
         val btnTeamScore: FloatingActionButton = when (teamName) {
             "A" -> viewBinding.floatingButtonTeamA
             "B" -> viewBinding.floatingButtonTeamB
@@ -58,16 +84,35 @@ class ActualScoringActivity : AppCompatActivity() {
             else -> throw IllegalArgumentException("Invalid team name")
         }
 
+        val penaltyScore: TextView = when(teamName) {
+            "A" -> viewBinding.penaltyScoreA
+            "B" -> viewBinding.penaltyScoreB
+            else -> throw IllegalArgumentException("Invalid team name")
+        }
         var scoreValue = 0
         btnTeamScore.setOnClickListener {
-           if(sportsName.countingType.toString().compareTo("standard") == 0) {
-               scoreValue++
-               if (!sportsName.scoreRange.contains(scoreValue)) {
-                   scoreValue = 0
-               }
-           } else {
-               Log.d("counting Type", sportsName.countingType.iterator().toString())
-           }
+           val selectedValue = viewBinding.typeOfCounting.selectedItem.toString()
+
+            penaltyScore.text = "0"
+
+            when(selectedValue.toString()) {
+                "sixes" -> {
+                    scoreValue += 6
+                }
+                "fours" -> {
+                    scoreValue += 4
+                } "penalty" -> {
+                    viewBinding.penaltyText.text = "Penalty"
+                    penaltyScore.text = (penaltyScore.text.toString().toInt()+1).toString()
+                }
+                else -> {
+                    scoreValue++
+                    if (!sportsName.scoreRange.contains(scoreValue)) {
+                        scoreValue = 0
+                    }
+                }
+            }
+
             scoreBoard.text = scoreValue.toString()
             compareScores(sportsName)
         }
