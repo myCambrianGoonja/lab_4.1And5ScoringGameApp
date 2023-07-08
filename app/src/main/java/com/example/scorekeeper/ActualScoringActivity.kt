@@ -1,94 +1,104 @@
 package com.example.scorekeeper
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.scorekeeper.databinding.ActivityActualScoringBinding
-import com.example.scorekeeper.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-
-enum class GAMESCORES(val gameName:String, val scoreRange:IntRange, countingType: String){
-    CRICKET("Cricket", 0..300, "ONLY_SIXES"),
-    FOOTBALL("Football", 0..9, "PENALTY_SHOTS"),
-    BADMINTON("Badminton", 0..15, "GAME_OF_SEVEN")
+enum class GAMESCORES(val gameName: String, val scoreRange: IntRange, val countingType: Array<String>) {
+    CRICKET("Cricket", 0..300, arrayOf("standard", "sixes", "fours")),
+    FOOTBALL("Football", 0..9, arrayOf("standard", "penalty")),
+    BADMINTON("Badminton", 0..15, arrayOf("standard", "seven_points"))
 }
 
-
 class ActualScoringActivity : AppCompatActivity() {
-    private lateinit var viewBinding : ActivityActualScoringBinding
+    private lateinit var viewBinding: ActivityActualScoringBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityActualScoringBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-
-         lateinit var viewBinding : ActivityMainBinding
-
-        //Getting the name of the sports selected
         val sportsName = getSportsName()
-
+        setUpSpinners(sportsName)
         addingPointsForTeams(sportsName, "A")
         addingPointsForTeams(sportsName, "B")
     }
 
-    private fun getSportsName():GAMESCORES {
+    private fun setUpSpinners(sportsName: GAMESCORES) {
+        val countingTypesAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            sportsName.countingType
+        )
+        viewBinding.typeOfCounting.adapter = countingTypesAdapter
+    }
+
+    private fun getSportsName(): GAMESCORES {
         val importedValue = intent.getStringExtra("GAME_NAME")
-        Log.d("imported Value", importedValue.toString())
-        val sportsName: GAMESCORES = GAMESCORES.values().find { it.name == importedValue }?: GAMESCORES.BADMINTON
-        var textViewName = findViewById<TextView>(R.id.nameOfTheGame).apply {
-            text = sportsName.name
-        }
+        val sportsName: GAMESCORES = GAMESCORES.values().find { it.name == importedValue }
+            ?: GAMESCORES.BADMINTON
+        viewBinding.nameOfTheGame.text = sportsName.gameName
         return sportsName
     }
 
-
     private fun addingPointsForTeams(sportsName: GAMESCORES, teamName: String) {
-        lateinit var btnTeamScore:FloatingActionButton
-        lateinit var scoreBoard:TextView
-        when(teamName) {
-            "A" -> {
-                btnTeamScore  = viewBinding.floatingButtonTeamA
-                scoreBoard = viewBinding.teamAScore
-            }
-            "B" -> {
-                btnTeamScore  = viewBinding.floatingButtonTeamB
-                scoreBoard = viewBinding.teamBScore
-            }
+        val btnTeamScore: FloatingActionButton = when (teamName) {
+            "A" -> viewBinding.floatingButtonTeamA
+            "B" -> viewBinding.floatingButtonTeamB
+            else -> throw IllegalArgumentException("Invalid team name")
+        }
+
+        val scoreBoard: TextView = when (teamName) {
+            "A" -> viewBinding.teamAScore
+            "B" -> viewBinding.teamBScore
+            else -> throw IllegalArgumentException("Invalid team name")
         }
 
         var scoreValue = 0
         btnTeamScore.setOnClickListener {
-            scoreValue++
-            if (!sportsName.scoreRange.contains(scoreValue)) {
-                scoreValue = 0
-            }
-
+           if(sportsName.countingType.toString().compareTo("standard") == 0) {
+               scoreValue++
+               if (!sportsName.scoreRange.contains(scoreValue)) {
+                   scoreValue = 0
+               }
+           } else {
+               Log.d("counting Type", sportsName.countingType.iterator().toString())
+           }
             scoreBoard.text = scoreValue.toString()
-            compareScores(sportsName, scoreValue)
+            compareScores(sportsName)
         }
     }
 
-    fun compareScores(gameName: GAMESCORES, scoreValue: Int) {
-        var whosWinning = viewBinding.whosWinning
-        var teamAScore = viewBinding.teamAScore
-        var teamBScore = viewBinding.teamAScore
+    private fun compareScores(gameName: GAMESCORES) {
+        val whosWinning = viewBinding.whosWinning
+        val teamAScore = viewBinding.teamAScore
+        val teamBScore = viewBinding.teamBScore
 
+        val maximumScore = gameName.scoreRange.last
 
-        val maximumScore = (gameName.scoreRange.count() - 1)
-
-            if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) < 0) {
+        when {
+            teamAScore.text.toString().toInt() < teamBScore.text.toString().toInt() -> {
                 whosWinning.text = "Team B seems to be winning"
-            } else if(teamAScore.text.toString().compareTo(teamBScore.text.toString()) > 0) {
+                if (teamBScore.text.toString().toInt() == maximumScore) {
+                    whosWinning.text = "Team B wins!"
+                }
+            }
+            teamAScore.text.toString().toInt() > teamBScore.text.toString().toInt() -> {
                 whosWinning.text = "Team A seems to be winning"
-            } else if((teamAScore.text.toString().compareTo("0") == 0) && (teamAScore.text.toString().compareTo("0") == 0) ) {
+                if (teamAScore.text.toString().toInt() == maximumScore) {
+                    whosWinning.text = "Team A wins"
+                }
+            }
+            teamAScore.text.toString().toInt() == 0 && teamBScore.text.toString().toInt() == 0 -> {
                 whosWinning.text = "Let's have another round then"
-            } else {
+            }
+            else -> {
                 whosWinning.text = "Seems to be a draw"
             }
-
-
+        }
     }
 }
