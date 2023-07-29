@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/danube"
     tools:context=".ActualScoringActivity">
 
     <TextView
         android:id="@+id/nameOfTheGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="@string/type_of_counting_text"
-            android:textColor="@color/shuttle_gray" />
+            android:text="@string/type_of_counting_text" />
 
         <Spinner
             android:id="@+id/type_of_counting"
@@ -57,7 +54,6 @@
             android:gravity="fill"
             android:padding="10sp"
             android:text="@string/team_a"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="2" />
 
@@ -67,7 +63,6 @@
             android:padding="10sp"
             android:paddingRight="0sp"
             android:text="@string/team_b"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="5" />
     </androidx.gridlayout.widget.GridLayout>
@@ -116,7 +111,6 @@
             android:paddingVertical="15dp"
             android:text="@string/zero"
             android:textAlignment="center"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="0"
             app:layout_row="2" />
@@ -129,7 +123,6 @@
             android:paddingHorizontal="10dp"
             android:text="@string/zero"
             android:textAlignment="center"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="5"
             app:layout_row="2" />
@@ -141,7 +134,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lets_play"
-        android:textColor="@color/shuttle_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +152,6 @@
             android:id="@+id/penalty_text"
             android:gravity="fill"
             android:padding="10sp"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_row="0"></TextView>
 
@@ -171,7 +162,6 @@
             android:layout_marginLeft="20dp"
             android:paddingHorizontal="10dp"
             android:textAlignment="center"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="0"
             app:layout_row="2"></TextView>
@@ -183,7 +173,6 @@
             android:layout_marginLeft="40dp"
             android:paddingHorizontal="10dp"
             android:textAlignment="center"
-            android:textColor="@color/shuttle_gray"
             android:textStyle="bold"
             app:layout_column="5"
             app:layout_row="2"

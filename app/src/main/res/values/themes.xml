@@ -1,9 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ScoreKeeper" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="customTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="CustomButton.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <!-- Customize the attributes as per your preference -->
+        <!-- For example, you can set custom background, text color, etc. -->
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/shuttle_gray</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">10dp</item>
+        <!-- Add more custom attributes here if needed -->
+    </style>
+
+
 
     <style name="Theme.ScoreKeeper" parent="Base.Theme.ScoreKeeper" />
 </resources>

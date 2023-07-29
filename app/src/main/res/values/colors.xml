@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="denim">#135EB6</color>
-    <color name="danube">#5C92D1</color>
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+<!--    <color name="denim">#135EB6</color>-->
+<!--    <color name="danube">#5C92D1</color>-->
     <color name="shuttle_gray">#646778</color>
+
+    <!-- Primary Color: Amethyst -->
+    <color name="colorPrimary">#8977c6</color>
+
+    <!-- Darker shade of Primary Color -->
+    <color name="colorPrimaryDark">#775eab</color>
+
+    <!-- Secondary Color: African Violet -->
+    <color name="colorSecondary">#a472ae</color>
+
+    <!-- Accent Color: Mountbatten pink -->
+    <color name="colorAccent">#ae8597</color>
+
+    <!-- Additional Color: Rosy brown -->
+    <color name="colorRosyBrown">#b39193</color>
+
+    <!-- Additional Color: Pink lavender -->
+    <color name="colorPinkLavender">#d0a7b3</color>
 </resources>

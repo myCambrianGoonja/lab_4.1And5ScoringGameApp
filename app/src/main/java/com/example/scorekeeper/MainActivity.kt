@@ -23,9 +23,6 @@ class MainActivity : AppCompatActivity() {
         * all the sports names are buttons and that is how deducing
         * which value was selected becomes easy
         * */
-        val badminton = findViewById<Button>(R.id.game_badminton)
-        val cricket = findViewById<Button>(R.id.game_cricket)
-        val football = findViewById<Button>(R.id.game_football)
 
         viewBinding.gameBadminton.setOnClickListener {
             callActualScoring(GAMESCORES.BADMINTON)
