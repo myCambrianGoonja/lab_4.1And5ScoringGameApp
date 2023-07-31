@@ -2,14 +2,27 @@
     <!-- Base application theme. -->
     <style name="customTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
         <!-- Customize your light theme here. -->
+
+        <!-- Set the background color of the window to colorPinkLavender -->
+        <item name="android:windowBackground">@color/colorPinkLavender</item>
+
+        <!-- Set the primary color to colorPrimary -->
         <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- Set the color of the status bar (action bar) to colorPrimaryDark -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- Set the accent color to colorAccent -->
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Set the default text color to shuttle_gray -->
+        <item name="android:textColor">@color/shuttle_gray</item>
     </style>
 
+    <!-- Style for custom TextButton -->
     <style name="CustomButton.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <!-- Customize the attributes as per your preference -->
-        <!-- For example, you can set custom background, text color, etc. -->
+        <!-- For example, you can set a custom transparent background and text color shuttle_gray -->
         <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:textColor">@color/shuttle_gray</item>
         <item name="android:textAlignment">center</item>
@@ -17,7 +30,14 @@
         <!-- Add more custom attributes here if needed -->
     </style>
 
+    <!-- Style for custom floating action button -->
+    <style name="customFloatingButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <!-- Set the background color to white -->
+        <item name="background">@color/white</item>
+        <!-- Set the icon color to shuttle_gray -->
+        <item name="color"> @color/shuttle_gray </item>
+    </style>
 
-
-    <style name="Theme.ScoreKeeper" parent="Base.Theme.ScoreKeeper" />
+    <!-- Use the customTheme as the parent for the application theme -->
+    <style name="Theme.ScoreKeeper" parent="customTheme" />
 </resources>

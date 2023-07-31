@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.scorekeeper.databinding.ActivityActualScoringBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
